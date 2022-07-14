@@ -1,4 +1,4 @@
-# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.236.0/containers/python-3-anaconda/.devcontainer/base.Dockerfile
+# See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.238.1/containers/python-3-anaconda/.devcontainer/base.Dockerfile
 
 FROM mcr.microsoft.com/vscode/devcontainers/anaconda:0-3
 
@@ -12,8 +12,13 @@ COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
 RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then umask 0002 && /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
     && rm -rf /tmp/conda-tmp
 
-# [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends libtext-csv-perl
+    && apt-get -y install --no-install-recommends libtext-csv-perl 
 
-RUN brew install parallel
+# Get a modern GNU parallel with csv options
+RUN wget https://ftp.gnu.org/gnu/parallel/parallel-20220622.tar.bz2 \
+    && tar xjf parallel-20220622.tar.bz2
+
+SHELL ["bash", "-c"]
+WORKDIR parallel-20220622
+RUN ./configure && make && make install

@@ -1,4 +1,7 @@
 #!/bin/bash
+
+alias cls="clear; ls"
+
 # these may not work in a codespace, it says not accessible by integration
 # this works at the command line.
 
