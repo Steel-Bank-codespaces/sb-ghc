@@ -21,4 +21,4 @@ RUN wget https://ftp.gnu.org/gnu/parallel/parallel-20220622.tar.bz2 \
 
 SHELL ["bash", "-c"]
 WORKDIR parallel-20220622
-RUN ./configure && make && make install
+RUN ./configure && make && make install && echo 'will cite' | parallel --citation 1> /dev/null 2> /dev/null 
