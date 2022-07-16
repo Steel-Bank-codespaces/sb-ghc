@@ -9,7 +9,7 @@ When managing a classroom you need to be able to do these things:
 
 We heavily utilize command-line scripts to automate these activities. The core strategies are using 
 
-1. the GitHUB command-line interface (`gh`) 
+1. the GitHUB command-line interface (`gh` https://cli.github.com/manual/gh) 
 2. A roster file in csv format
 3. A course setup file in yaml
 4. `GNU parallel` for iterating in the roster

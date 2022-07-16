@@ -1,0 +1,39 @@
+* gh commands - https://cli.github.com/manual/gh
+
+** gh auth
+
+out of the box you get @jkitchin ➜ /workspaces/sb-ghc (main ✗) $ gh repo create test -d "a test repo" --private
+GraphQL: jkitchin does not have the correct permissions to execute `CreateRepository` (createRepository)
+
+
+You have to unset GITHUB_TOKEN and then reauthorize with this. Maybe it should have 
+the scopes setup here.
+
+> gh auth login -h github.com -s delete_repo -w -p https
+
+to delete you have to add this authorization with another
+
+> gh auth refresh -h github.com -s delete_repo
+
+** gh repo
+
+- create (from template)
+
+gh repo create Steel-Bank-codespaces/test-sb --private --template=Steel-Bank-codespaces/jupyter-starter
+
+
+gh repo delete Steel-Bank-codespaces/test-sb --confirm
+
+- clone
+- fork
+- view
+
+** extensions
+
+https://cli.github.com/manual/gh_extension
+
+GitHub CLI extensions are repositories that provide additional gh commands.
+
+The name of the extension repository must start with "gh-" and it must contain an executable of the same name. All arguments passed to the gh <extname> invocation will be forwarded to the gh-<extname> executable of the extension.
+
+https://github.com/topics/gh-extension

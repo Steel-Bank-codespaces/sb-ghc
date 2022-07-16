@@ -21,4 +21,9 @@ RUN wget https://ftp.gnu.org/gnu/parallel/parallel-20220622.tar.bz2 \
 
 SHELL ["bash", "-c"]
 WORKDIR parallel-20220622
-RUN ./configure && make && make install && echo 'will cite' | parallel --citation 1> /dev/null 2> /dev/null 
+RUN ./configure && make && make install 
+
+# This foolishness is because the parallel program requires you 
+# to agree that you will cite it if you use it in research the first time you use it.
+USER vscode
+RUN echo 'will cite' | parallel --citation 1 || true
